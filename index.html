@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIAZANIME</title>
+    <style>
+        :root { --main: #e50914; --bg: #0b0b0b; --card: #181818; }
+        body { background: var(--bg); color: white; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; }
+        .nav { padding: 15px 5%; background: rgba(0,0,0,0.8); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .logo { color: var(--main); font-size: 22px; font-weight: 900; letter-spacing: 1px; }
+        .chat-link { color: white; text-decoration: none; border: 1px solid white; padding: 5px 15px; border-radius: 20px; font-size: 14px; }
+        
+        .hero { padding: 40px 5%; background: linear-gradient(to bottom, transparent, var(--bg)), url('https://images.unsplash.com/photo-1578632292335-df3abbb0d586?auto=format&fit=crop&w=1000'); background-size: cover; height: 200px; display: flex; align-items: flex-end; }
+        
+        .container { padding: 20px 5%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+        
+        .movie { background: var(--card); border-radius: 8px; transition: 0.3s; position: relative; }
+        /* Фикс размера фото: всегда 2:3 */
+        .movie img { width: 100%; aspect-ratio: 2/3; object-fit: cover; border-radius: 8px 8px 0 0; }
+        .info { padding: 10px; }
+        h3 { margin: 5px 0; font-size: 14px; }
+        .rating { color: #46d369; font-weight: bold; font-size: 12px; }
+        .btn { background: var(--main); color: white; border: none; width: 100%; padding: 8px; border-radius: 4px; font-weight: bold; margin-top: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="nav">
+    <div class="logo">NIAZANIME</div>
+    <a href="chat.html" class="chat-link">ОТКРЫТЬ ЧАТ</a>
+</div>
+
+<div class="hero">
+    <h1>ЛУЧШИЕ АНИМЕ</h1>
+</div>
+
+<div class="container">
+    <div class="grid">
+        <div class="movie">
+            <img src="2TP018QS51eFzJPCgvHCYg.png" alt="Твое имя">
+            <div class="info">
+                <div class="rating">98% Match</div>
+                <h3>Твое имя</h3>
+                <button class="btn">СМОТРЕТЬ</button>
+            </div>
+        </div>
+
+        <div class="movie">
+            <img src="2026-01-30-08-13-12-image.png" alt="Унесенные призраками">
+            <div class="info">
+                <div class="rating">95% Match</div>
+                <h3>Унесенные призраками</h3>
+                <button class="btn">СМОТРЕТЬ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    console.log("NiazAnime Pro System Active");
+    // Защита и логика здесь больше не нужна, она в chat.html
+</script>
+
+</body>
+</html>
