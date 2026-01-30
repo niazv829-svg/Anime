@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIYAZANIME | PRO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        :root { --red: #e50914; --black: #0b0b0b; --gray: #1f1f1f; }
+        body { background: var(--black); color: white; font-family: 'Arial', sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; }
+        
+        /* Шапка с красивым шрифтом */
+        .header { padding: 15px; text-align: center; background: #000; border-bottom: 2px solid var(--red); }
+        .logo { font-family: 'Bebas Neue', cursive; font-size: 40px; color: var(--red); letter-spacing: 3px; }
+        
+        /* Окно чата */
+        #chat-box { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .msg { background: var(--gray); padding: 12px; border-radius: 10px; border-left: 4px solid var(--red); max-width: 85%; }
+        .msg b { color: var(--red); display: block; margin-bottom: 5px; font-size: 13px; }
+        
+        /* Зона ввода */
+        .input-area { padding: 15px; background: #141414; display: flex; gap: 10px; border-top: 1px solid #333; }
+        input { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #444; background: #222; color: white; outline: none; }
+        .btn { background: var(--red); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        
+        /* Модальное окно для ника */
+        #nick-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .modal-content { background: var(--gray); padding: 30px; border-radius: 15px; text-align: center; border: 1px solid var(--red); }
+    </style>
+</head>
+<body>
+
+<div id="nick-modal">
+    <div class="modal-content">
+        <h2>Добро пожаловать!</h2>
+        <p>Введите ваш ник для чата:</p>
+        <input type="text" id="user-nick" placeholder="Ваш ник...">
+        <br><br>
+        <button class="btn" onclick="saveNick()">ВОЙТИ</button>
+    </div>
+</div>
+
+<div class="header">
+    <div class="logo">NIYAZANIME</div>
+</div>
+
+<div id="chat-box"></div>
+
+<div class="input-area">
+    <input type="text" id="m" placeholder="Напишите сообщение..." onkeypress="if(event.key==='Enter')send()">
+    <button class="btn" onclick="send()">ОТПРАВИТЬ</button>
+</div>
+
+<script>
+    const chatBox = document.getElementById('chat-box');
+    const input = document.getElementById('m');
+    let currentUser = localStorage.getItem('niaz_user') || "";
+
+    // Проверка ника при загрузке
+    window.onload = () => {
+        if (!currentUser) {
+            document.getElementById('nick-modal').style.display = 'flex';
+        }
+        loadChat();
+    };
+
+    function saveNick() {
+        const nickInput = document.getElementById('user-nick').value.trim();
+        if (nickInput) {
+            localStorage.setItem('niaz_user', nickInput);
+            currentUser = nickInput;
+            document.getElementById('nick-modal').style.display = 'none';
+        }
+    }
+
+    // Защита от взлома (XSS)
+    function clean(s) {
+        return s.replace(/[<>'"/]/g, m => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;",'/':'&#47;'}[m]));
+    }
+
+    function send() {
+        if (input.value.trim() && currentUser) {
+            const time = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+            const msgHtml = `<div class="msg"><b>${currentUser} • ${time}</b>${clean(input.value)}</div>`;
+            
+            chatBox.innerHTML += msgHtml;
+            saveChat();
+            input.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    }
+
+    // Сохранение и загрузка
+    function saveChat() {
+        localStorage.setItem('niaz_chat_history', chatBox.innerHTML);
+    }
+
+    function loadChat() {
+        const history = localStorage.getItem('niaz_chat_history');
+        if (history) {
+            chatBox.innerHTML = history;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    }
+</script>
+
+</body>
+</html>
