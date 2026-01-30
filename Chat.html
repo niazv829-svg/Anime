@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат | NIAZANIME</title>
+    <style>
+        body { background: #0b0b0b; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; }
+        .chat-header { color: #e50914; font-size: 24px; font-weight: bold; margin-bottom: 20px; }
+        #chat-box { height: 60vh; overflow-y: auto; background: #141414; padding: 15px; border-radius: 10px; border: 1px solid #333; margin-bottom: 15px; }
+        .input-group { display: flex; gap: 10px; }
+        input { flex: 1; padding: 12px; border-radius: 5px; border: 1px solid #444; background: #222; color: white; }
+        .send-btn { background: #e50914; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        .msg { margin-bottom: 10px; padding: 10px; background: #1f1f1f; border-radius: 5px; border-left: 4px solid #e50914; }
+        .back-btn { display: inline-block; margin-bottom: 20px; color: #aaa; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← Назад на главную</a>
+    <div class="chat-header">Чат</div>
+    <div id="chat-box"></div>
+    <div class="input-group">
+        <input type="text" id="chat-msg" placeholder="Напишите сообщение..." onkeypress="if(event.key==='Enter')send()">
+        <button class="send-btn" onclick="send()">ОТПРАВИТЬ</button>
+    </div>
+
+    <script>
+        function clean(s) { return s.replace(/[<>'"/]/g, m => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;",'/':'&#47;'}[m])); }
+        function send() {
+            const i = document.getElementById('chat-msg');
+            const b = document.getElementById('chat-box');
+            if(i.value.trim()){
+                const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                b.innerHTML += `<div class="msg"><strong>[${time}] Нияз:</strong> ${clean(i.value)}</div>`;
+                i.value = ""; b.scrollTop = b.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
