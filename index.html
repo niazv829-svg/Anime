@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIYAZANIME</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        :root { --red: #e50914; --black: #0b0b0b; }
+        body { background: var(--black); color: white; font-family: 'Arial', sans-serif; margin: 0; }
+        .nav { padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.9); border-bottom: 2px solid var(--red); }
+        .logo { color: var(--red); font-family: 'Bebas Neue', cursive; font-size: 35px; letter-spacing: 2px; }
+        .chat-btn { background: var(--red); color: white; text-decoration: none; padding: 8px 20px; border-radius: 5px; font-weight: bold; font-size: 14px; transition: 0.3s; }
+        .chat-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--red); }
+        
+        .container { padding: 20px 5%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+        .movie { background: #181818; border-radius: 10px; overflow: hidden; border: 1px solid #333; }
+        .movie img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
+        .info { padding: 10px; }
+        h3 { margin: 5px 0; font-size: 14px; color: #fff; }
+        .rating { color: #46d369; font-weight: bold; font-size: 12px; margin-bottom: 5px; }
+        .watch-btn { background: var(--red); color: white; border: none; width: 100%; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="nav">
+    <div class="logo">NIYAZANIME</div>
+    <a href="chat.html" class="chat-btn">ЧАТ СООБЩЕСТВА</a>
+</div>
+
+<div class="container">
+    <div class="grid">
+        <div class="movie">
+            <img src="2TP018QS51eFzJPCgvHCYg.png" alt="Твое имя">
+            <div class="info">
+                <div class="rating">98% Match</div>
+                <h3>Твое имя</h3>
+                <button class="watch-btn">СМОТРЕТЬ</button>
+            </div>
+        </div>
+
+        <div class="movie">
+            <img src="2026-01-30-08-13-12-image.png" alt="Унесенные призраками">
+            <div class="info">
+                <div class="rating">95% Match</div>
+                <h3>Унесенные призраками</h3>
+                <button class="watch-btn">СМОТРЕТЬ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
