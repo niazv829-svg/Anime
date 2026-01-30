@@ -1,0 +1,32 @@
+<script>
+    const chatBox = document.getElementById('chat-box');
+    const input = document.getElementById('m');
+
+    // 1. ЗАГРУЗКА: При открытии страницы достаем старые сообщения из памяти
+    window.onload = () => {
+        const savedChat = localStorage.getItem('niaz_messages');
+        if (savedChat) {
+            chatBox.innerHTML = savedChat;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    };
+
+    function clean(s) { return s.replace(/[<>'"/]/g, m => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;",'/':'&#47;'}[m])); }
+
+    function send() {
+        if (input.value.trim()) {
+            const time = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+            const newMessage = `<div class="msg"><strong>[${time}] Нияз:</strong> ${clean(input.value)}</div>`;
+            
+            // Добавляем сообщение в окно
+            chatBox.innerHTML += newMessage;
+            
+            // 2. СОХРАНЕНИЕ: Записываем всё содержимое чата в память телефона
+            localStorage.setItem('niaz_messages', chatBox.innerHTML);
+            
+            input.value = ""; 
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    }
+                                                       </script>
+                                                       
